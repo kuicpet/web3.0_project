@@ -2,7 +2,7 @@ import React from 'react'
 
 const Loader = () => {
     return (
-        <div>
+        <div className='flex justify-center items-center py-3'>
             Loader
         </div>
     )
