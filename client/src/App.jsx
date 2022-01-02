@@ -1,7 +1,6 @@
 import {
   Navbar,
   Welcome,
-  Loader,
   Services,
   Transactions,
   Footer,
