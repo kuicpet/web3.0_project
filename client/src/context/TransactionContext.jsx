@@ -26,7 +26,7 @@ const getEthereumContract = () => {
 export const TransactionProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState('')
   const [formData, setFormData] = useState({
-    addresTo: '',
+    addressTo: '',
     amount: '',
     keyword: '',
     message: '',
