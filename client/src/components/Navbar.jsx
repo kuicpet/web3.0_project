@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { HiOutlineMenuAlt4, HiOutlineX } from 'react-icons/hi'
 
-
 import logo from '../../images/web3.png'
 
 const NavbarItem = ({ title, classProps }) => {
@@ -36,10 +35,14 @@ const Navbar = () => {
             onClick={() => setToggleMenu(true)}
           />
         )}
+        {/**Mobile Menu */}
         {toggleMenu && (
-          <ul className='z-10 fixed top-0 -right-2 p-3 w-[70vw] h-screen shadow-2xl md:hidden list-none flex flex-col justify-start items-end rounded-md blue-glassmorphism text-white animate-slide-in'>
+          <ul className='z-10 fixed top-0 -right-2 p-3 w-[70vw] h-screen shadow-2xl md:hidden list-none flex flex-col justify-start items-end rounded-md blue-glassmorphism text-white animate-slide-in bg-black'>
             <li className='text-xl w-full my-2'>
-              <HiOutlineX onClick={() => setToggleMenu(false)} />
+              <HiOutlineX
+                className='cursor-pointer'
+                onClick={() => setToggleMenu(false)}
+              />
             </li>
             {['Market', 'Exchange', 'Tutorials', 'Wallets'].map(
               (item, index) => (
