@@ -22,7 +22,7 @@ const Services = () => {
           </h1>
         </div>
       </div>
-      <div className='flex-1 flex flex-col justify-start items-center'>
+      <div className='flex-1 flex flex-col justify-start items-center m-2'>
         <ServiceCard
           color='bg-[#2952e3]'
           title='Security Guaranteed'
