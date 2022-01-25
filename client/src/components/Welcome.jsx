@@ -3,6 +3,8 @@ import React, { useState, useContext } from 'react'
 import { SiEthereum } from 'react-icons/si'
 import { BsInfoCircle } from 'react-icons/bs'
 import { TransactionContext } from '../context/TransactionContext'
+import { IoWalletOutline } from 'react-icons/io5'
+import { FiSend } from 'react-icons/fi'
 
 import { Loader } from './'
 import { shortenAddress } from '../utils/shortenAddress'
@@ -28,7 +30,7 @@ const Welcome = () => {
     formData,
     sendTransaction,
     handleChange,
-    isLoading
+    isLoading,
   } = useContext(TransactionContext)
 
   const handleSubmit = (e) => {
@@ -37,7 +39,7 @@ const Welcome = () => {
     if (!addressTo || !amount || !keyword || !message) return
     sendTransaction()
   }
-  
+
   return (
     <div className='flex w-full justify-center items-center'>
       <div className='flex mf:flex-row flex-col items-start justify-between md:p-20 py-12 px-4'>
@@ -55,6 +57,7 @@ const Welcome = () => {
               onClick={connectWallet}
               className='flex flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd] text-white font-semibold text-base'
             >
+              <IoWalletOutline className='mx-5' fontSize={21} />
               Connect Wallet
             </button>
           )}
@@ -78,10 +81,12 @@ const Welcome = () => {
                 <BsInfoCircle fontSize={17} color='#fff' />
               </div>
               <div>
-                <p className='text-white font-light text-sm'>{shortenAddress(currentAccount || "")}</p>
+                <p className='text-white font-light text-sm'>
+                  {shortenAddress(currentAccount || '')}
+                </p>
                 <p className='text-white font-semibold text-lg mt-1'>
                   Ethereum
-                </p> 
+                </p>
               </div>
             </div>
           </div>
@@ -118,9 +123,10 @@ const Welcome = () => {
               <button
                 type='button'
                 onClick={handleSubmit}
-                className='text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] rounded-full cursor-pointer'
+                className='text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] rounded-full cursor-pointer flex items-center justify-center'
               >
-                Send Now
+                <FiSend fontSize={21} className='mx-3' />
+                Send
               </button>
             )}
           </div>
