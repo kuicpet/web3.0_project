@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 // import { AiFillPlayCircle } from 'react-icons/ai'
 import { SiEthereum } from 'react-icons/si'
 import { BsInfoCircle } from 'react-icons/bs'
@@ -90,46 +90,48 @@ const Welcome = () => {
               </div>
             </div>
           </div>
-          <div className='p-5 sm:w-96 w-full flex flex-col justify-start items-center blue-glassmorphism'>
-            <Input
-              placeholder='Address to'
-              name='addressTo'
-              type='text'
-              handleChange={handleChange}
-            />
-            <Input
-              placeholder='Amount (ETH)'
-              name='amount'
-              type='number'
-              handleChange={handleChange}
-            />
-            <Input
-              placeholder='Keyword (GIF)'
-              name='keyword'
-              type='text'
-              handleChange={handleChange}
-            />
-            <Input
-              placeholder='Enter Message'
-              name='message'
-              type='text'
-              handleChange={handleChange}
-            />
+          {currentAccount && (
+            <div className='p-5 sm:w-96 w-full flex flex-col justify-start items-center blue-glassmorphism'>
+              <Input
+                placeholder='Address to'
+                name='addressTo'
+                type='text'
+                handleChange={handleChange}
+              />
+              <Input
+                placeholder='Amount (ETH)'
+                name='amount'
+                type='number'
+                handleChange={handleChange}
+              />
+              <Input
+                placeholder='Keyword (GIF)'
+                name='keyword'
+                type='text'
+                handleChange={handleChange}
+              />
+              <Input
+                placeholder='Enter Message'
+                name='message'
+                type='text'
+                handleChange={handleChange}
+              />
 
-            <div className='h-[1px] w-full bg-gray-400 my-2' />
-            {isLoading ? (
-              <Loader />
-            ) : (
-              <button
-                type='button'
-                onClick={handleSubmit}
-                className='text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] rounded-full cursor-pointer flex items-center justify-center'
-              >
-                <FiSend fontSize={21} className='mx-3' />
-                Send
-              </button>
-            )}
-          </div>
+              <div className='h-[1px] w-full bg-gray-400 my-2' />
+              {isLoading ? (
+                <Loader />
+              ) : (
+                <button
+                  type='button'
+                  onClick={handleSubmit}
+                  className='text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] rounded-full cursor-pointer flex items-center justify-center'
+                >
+                  <FiSend fontSize={21} className='mx-3' />
+                  Send
+                </button>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>
