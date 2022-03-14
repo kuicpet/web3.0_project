@@ -31,6 +31,7 @@ const Welcome = () => {
     sendTransaction,
     handleChange,
     isLoading,
+    disconnectWallet,
   } = useContext(TransactionContext)
 
   const handleSubmit = (e) => {
@@ -62,6 +63,11 @@ const Welcome = () => {
             </button>
           )}
 
+          {currentAccount && (
+            <button type='button' onClick={disconnectWallet} className='flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd] text-white font-semibold text-base'>
+              Disconnect : {shortenAddress(currentAccount || "")}
+            </button>
+          )}
           <div className='grid sm:grid-cols-3 grid-cols-2 w-full mt-10'>
             <div className={`rounded-tl-2xl ${commonStyles}`}>Relibility</div>
             <div className={commonStyles}>Security</div>

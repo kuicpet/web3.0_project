@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { ethers } from 'ethers'
 import { contractABI, contractAddress } from '../utils/constants'
+import toast, { Toaster } from 'react-hot-toast'
 
 export const TransactionContext = React.createContext()
 
 const { ethereum } = window
+const notify = () => toast('Connect your Wallet')
 
 // get ethereum contract
 const getEthereumContract = () => {
@@ -33,7 +35,9 @@ export const TransactionProvider = ({ children }) => {
     message: '',
   })
   const [isLoading, setIsLoading] = useState(false)
-  const [transactionCount, setTransactionCount] = useState(localStorage.getItem('transactionCount'))
+  const [transactionCount, setTransactionCount] = useState(
+    localStorage.getItem('transactionCount')
+  )
   const [transactions, setTransactions] = useState([])
 
   const handleChange = (e, name) => {
@@ -45,15 +49,20 @@ export const TransactionProvider = ({ children }) => {
     try {
       if (!ethereum) return alert('Please install metamask')
       const transactionContract = getEthereumContract()
-      const availableTransactions = await transactionContract.getAllTransactions()
-      const structuredTransactions = availableTransactions.map((transaction) => ({
-        addressTo: transaction.receiver,
-        addressFrom: transaction.sender,
-        timestamp: new Date(transaction.timestamp.toNumber() * 1000).toLocaleString(),
-        message: transaction.keyword,
-        keyword: transaction.keyword,
-        amount: parseInt(transaction.amount._hex) / (10 ** 18)
-      }))
+      const availableTransactions =
+        await transactionContract.getAllTransactions()
+      const structuredTransactions = availableTransactions.map(
+        (transaction) => ({
+          addressTo: transaction.receiver,
+          addressFrom: transaction.sender,
+          timestamp: new Date(
+            transaction.timestamp.toNumber() * 1000
+          ).toLocaleString(),
+          message: transaction.keyword,
+          keyword: transaction.keyword,
+          amount: parseInt(transaction.amount._hex) / 10 ** 18,
+        })
+      )
       //console.log(availableTransactions)
       // console.log(structuredTransactions)
       setTransactions(structuredTransactions)
@@ -86,7 +95,7 @@ export const TransactionProvider = ({ children }) => {
     try {
       const transactionContract = getEthereumContract()
       const transactionCount = await transactionContract.getTransactionCount()
-      window.localStorage.setItem("transactionCount", transactionCount)
+      window.localStorage.setItem('transactionCount', transactionCount)
     } catch (error) {
       console.log(error)
       throw new Error('No Ethereum Object')
@@ -104,6 +113,11 @@ export const TransactionProvider = ({ children }) => {
       console.log(error)
       throw new Error('No Ethereum Object')
     }
+  }
+
+  // disconnect Wallet
+  const disconnectWallet = () => {
+    setCurrentAccount('')
   }
 
   // send transaction to the blockchain
@@ -159,7 +173,8 @@ export const TransactionProvider = ({ children }) => {
         handleChange,
         sendTransaction,
         transactions,
-        isLoading
+        isLoading,
+        disconnectWallet
       }}
     >
       {children}
