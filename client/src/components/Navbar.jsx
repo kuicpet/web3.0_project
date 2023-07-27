@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { HiOutlineMenuAlt4, HiOutlineX } from 'react-icons/hi'
 
 import logo from '../../images/web3.png'
 
